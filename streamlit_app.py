@@ -47,7 +47,7 @@ my_data_row = my_cur.fetchone()
 streamlit.write('The user entered ', my_data_row)
 
 #This will not work correctly, but just goi for now.
-my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('from sreamlit')"
+my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('from sreamlit')")
 
 
 
