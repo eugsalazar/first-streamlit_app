@@ -46,5 +46,8 @@ my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST where FRUIT_NA
 my_data_row = my_cur.fetchone()
 streamlit.write('The user entered ', my_data_row)
 
+#This will not work correctly, but just goi for now.
+my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('from sreamlit')"
+
 
 
