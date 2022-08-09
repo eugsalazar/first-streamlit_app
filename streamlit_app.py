@@ -3,8 +3,7 @@ import streamlit
 import pandas
 import snowflake.connector
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
+
 
 
 streamlit.title('My Parents New Healthy Diner')
@@ -41,8 +40,8 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized)
 
-#my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-#my_cur = my_cnx.cursor()
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_cur = my_cnx.cursor()
 add_my_fruit = streamlit.text_input('Hola', 'Kiwi')
 my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST where FRUIT_NAME = '"+ add_my_fruit + "'" )
 my_data_row = my_cur.fetchone()
