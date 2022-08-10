@@ -46,12 +46,21 @@ except URLError as e:
   Streamlit.error()
 
 streamlit.stop()
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-add_my_fruit = streamlit.text_input('Hola', 'Kiwi')
-my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST where FRUIT_NAME = '"+ add_my_fruit + "'" )
-my_data_row = my_cur.fetchone()
-streamlit.write('The user entered ', my_data_row)
+streamlit.header("The fruit load list contains:")
+#Snowflake-related functions
+def get_fruit_load_list();
+  with my_cnx.cursor() as my_cur;
+  my_cur.execute("select * from fruit_load_list")
+  return my_cur.fetchall()
+  
+  #Add a button to load the fruit
+  if streamlit.button('Get Fruit Load List'):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+#my_cur = my_cnx.cursor()
+#add_my_fruit = streamlit.text_input('Hola', 'Kiwi')
+#my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST where FRUIT_NAME = '"+ add_my_fruit + "'" )
+my_data_rows = get_fruit_load_list()
+streamlit.dataframe(my_data_rows)
 
 #This will not work correctly, but just goi for now.
 #my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('from sreamlit')")
